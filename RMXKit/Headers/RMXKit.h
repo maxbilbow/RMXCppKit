@@ -7,14 +7,15 @@
  *
  */
 extern "C" {
+#ifdef MAC_OSX
 #include <CoreFoundation/CoreFoundation.h>
-
+#endif
 
 #pragma GCC visibility push(default)
 
 /* External interface to the RMXKit, C-based */
 
-CFStringRef RMXKitUUID(void);
+//CFStringRef RMXKitUUID(void);
 
 #pragma GCC visibility pop
 }

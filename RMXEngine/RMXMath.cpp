@@ -10,12 +10,14 @@
 //#import "RMXMath.hpp"
 //#import <GLKit/GLKVector3.h>
 #include "Includes.h"
-#include <math.h>
+#include <cmath>
+
 using namespace std;
+using namespace rmx;
 
 
 Vector3 RMXMatrix4Position(Matrix4 m) {
-    return GLKVector3Make(m.m30, m.m31, m.m32);
+    return Vector3Make(m.m30, m.m31, m.m32);
 }
 
 Matrix4 RMXMatrix4Negate(Matrix4 m) {
@@ -178,7 +180,7 @@ string& operator+=(string& lhs, float rhs) {
     return lhs += to_string(rhs);
 }
 
-string S(float f) {
+string S(double f) {
     return to_string(f);
 }
 

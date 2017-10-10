@@ -12,22 +12,23 @@
 
 #endif /* Includes_h */
 #import <iostream>
-#import <GLKit/GLKMatrix4.h>
-#import <GLKit/GLKVector3.h>
-#import <GLKit/GLKVector4.h>
+
+#include "../RMXMaths/types.h"
 //
-typedef GLKMatrix4 Matrix4;
-typedef GLKVector3 Vector3;
-typedef GLKVector4 Vector4;
-typedef GLKQuaternion Quaternion;
+typedef rmx::Matrix4 Matrix4;
+typedef rmx::Vector3 Vector3;
+typedef rmx::Vector4 Vector4;
+typedef rmx::Quaternion Quaternion;
 typedef Vector3 EulerAngles;
+
 //typedef int BOOL;
 #define TRUE 1
 #define FALSE 0
 //typedef nullptr null;
 //#define null nullptr
-#import "RMXKit.h"
-#import "RMXMath.hpp"
+
+#include "../RMXKit/Headers/RMXKit.h"
+#include "RMXMath.hpp"
 
 
 //
@@ -40,7 +41,7 @@ typedef Vector3 EulerAngles;
 //#import <CoreVideo/CoreVideo.h>
 //#import <IOKit/IOKitLib.h>
 //#import <Cocoa/Cocoa.h>
-#include "glfw3.h"
+#include <GLFW/glfw3.h>
 typedef GLFWwindow GLWindow;
 #else
 
