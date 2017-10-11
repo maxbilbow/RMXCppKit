@@ -13,7 +13,7 @@
 
 
 
-#import "NodeComponent.hpp"
+#import "NodeComponent.h"
 #import "PhysicsBody.hpp"
 #import "CollisionBody.hpp"
 #import "CollisionEvent.hpp"

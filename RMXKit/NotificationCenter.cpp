@@ -7,13 +7,11 @@
 //
 
 
-#import <iostream>
-//#import "EventListener.h"
-//#import "LinkedList.h"
-//#import "Dictionary.h"
-#import "Tests.h"
-#import "NotificationCenter.h"
-#define DEBUG_THIS (DEBUG_INCLUDE_TEST_OUTPUT || DEBUG_RMX_NOTIFICATION_CENTER)
+#include <iostream>
+#include "NotificationCenter.h"
+#ifdef DEBUG_RMX_NOTIFICATION_CENTER
+#define DEBUG_THIS true
+#endif
 
 using namespace rmx;
 
@@ -283,5 +281,7 @@ void NotificationCenter::Update() {}
 
 */
 
+#ifdef DEBUG_THIS
+#undef DEBUG_THIS
 
 

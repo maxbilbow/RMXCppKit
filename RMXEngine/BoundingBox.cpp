@@ -11,7 +11,7 @@
 
 
 //
-#import "NodeComponent.hpp"
+#import "NodeComponent.h"
 
 #import "Transform.hpp"
 #import "CollisionBody.hpp"

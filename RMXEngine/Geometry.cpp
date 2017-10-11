@@ -8,7 +8,7 @@
 
 #import "Includes.h"
 #import "GameNode.hpp"
-#import "NodeComponent.hpp"
+#import "NodeComponent.h"
 #import "Transform.hpp"
 #ifdef GLFW
 #import "glfw3.h"

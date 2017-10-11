@@ -18,11 +18,11 @@
 #endif
 
 #ifndef NodeComponent_hpp
-#import "NodeComponent.hpp"
+#import "NodeComponent.h"
 #endif
 
 #ifndef Camera_hpp
-#import "Camera.hpp"
+#import "Camera.h"
 #endif
 
 #ifndef PhysicsWorld_hpp

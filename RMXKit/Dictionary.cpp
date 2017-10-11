@@ -12,7 +12,7 @@
 //
 //
 //#import "LinkedList.h"
-#import "Tests.h"
+#import "../tests/RMXKit/Tests.h"
 #import "Dictionary.h"
 #import "Object.h"
 #define DEBUG_THIS (DEBUG_INCLUDE_TEST_OUTPUT || DEBUG_RMX_DICTIONARY)

@@ -9,7 +9,7 @@
 #ifndef NodeComponent_hpp
 #define NodeComponent_hpp
 
-#include <stdio.h>
+#include <iostream>
 
 #endif /* NodeComponent_hpp */
 

@@ -15,7 +15,6 @@
 
 
 
-#endif /* RMXNotificationCenter_cpp */
 
 #define EVENT_STATUS_IDLE       0ui
 #define EVENT_STATUS_ACTIVE     1ui
@@ -23,9 +22,9 @@
 #define EVENT_STATUS_FAILURE    3ui
 
 
-#import "LinkedList.h"
-#import "Dictionary.h"
-#import "EventListener.h"
+#include "LinkedList.h"
+#include "Dictionary.h"
+#include "EventListener.h"
 
 
 
@@ -197,3 +196,6 @@ namespace rmx {
     };
 }
 
+
+
+#endif /* RMXNotificationCenter_cpp */

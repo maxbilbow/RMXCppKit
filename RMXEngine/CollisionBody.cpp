@@ -10,7 +10,7 @@
 
 
 #import "GameNode.hpp"
-#import "NodeComponent.hpp"
+#import "NodeComponent.h"
 #import "CollisionBody.hpp"
 #import "Transform.hpp"
 

@@ -2,12 +2,17 @@
 // Created by max on 10/10/17.
 //
 
-#include "RMXMaths.h"
+#include "raw_types.h"
+#include "operations.h"
 #include <cmath>
 
 
 using namespace std;
 using namespace rmx;
+
+Vector3 rmx::Vector3Make(RMXDecimal x, RMXDecimal y, RMXDecimal z) {
+    return Vector3(x,y,z);
+}
 
 
 Vector3 rmx::Matrix4Position(Matrix4 m) {
@@ -40,7 +45,7 @@ Vector3 rmx::Matrix3MakeEuler(Matrix4 m) {
 //                           );
 }
 
-Matrix4 rmx::Matrix4RotateAboutPoint(Matrix4 m, RMXDouble radians, Vector3 axis, Vector3 point) {
+Matrix4 rmx::Matrix4RotateAboutPoint(Matrix4 m, RMXDecimal radians, Vector3 axis, Vector3 point) {
 
     Vector3 p = rmx::Matrix4Position(m);
     m.m30 = point.x;
@@ -54,7 +59,7 @@ Matrix4 rmx::Matrix4RotateAboutPoint(Matrix4 m, RMXDouble radians, Vector3 axis,
     return m;
 }
 
-Matrix4 rmx::Matrix4RotateWithVector3(Matrix4 matrix4, RMXDouble radians, Vector3 vector3) {
+Matrix4 rmx::Matrix4RotateWithVector3(Matrix4 matrix4, RMXDecimal radians, Vector3 vector3) {
     return Matrix4(); //TODO GLKMatrix4RotateWithVector3
 }
 
@@ -78,7 +83,7 @@ Matrix4 operator*(Matrix4 lhs,  Vector3 rhs) {
     return Matrix4();//todo GLKMatrix4ScaleWithVector3(lhs, rhs);
 }
 
-Matrix4 operator*(Matrix4 lhs, RMXDouble rhs) {
+Matrix4 operator*(Matrix4 lhs, RMXDecimal rhs) {
 
     return Matrix4();//todo GLKMatrix4Multiply(lhs, GLKMatrix4MakeScale(rhs, rhs, rhs));
 }
@@ -118,7 +123,7 @@ Vector3 operator/(Vector3 lhs,  Vector3 rhs) {
 //    todo: is this the same as  GLKVector3Divide(lhs, rhs);
 }
 
-Vector3 operator*(Vector3 lhs, RMXDouble rhs) {
+Vector3 operator*(Vector3 lhs, RMXDecimal rhs) {
     Vector3 v;
     v.x = lhs.x * rhs;
     v.y = lhs.y * rhs;
@@ -126,8 +131,8 @@ Vector3 operator*(Vector3 lhs, RMXDouble rhs) {
     return v;
 }
 
-Vector3 operator/(Vector3 lhs,  RMXDouble rhs) {
-    Vector3 v;
+Vector3 operator/(Vector3 lhs,  RMXDecimal rhs) {
+    Vector3 v = Vector3Make();
     v.x = lhs.x / rhs;
     v.y = lhs.y / rhs;
     v.z = lhs.z / rhs;
@@ -180,31 +185,31 @@ void operator/=(Vector3& lhs,  Vector3 rhs) {
     lhs.z /= rhs.z;
 }
 
-void operator*=(Vector3& lhs,  RMXDouble rhs) {
+void operator*=(Vector3& lhs,  RMXDecimal rhs) {
     lhs.x *= rhs;
     lhs.y *= rhs;
     lhs.z *= rhs;
 }
 
-void operator/=(Vector3& lhs,  RMXDouble rhs) {
+void operator/=(Vector3& lhs,  RMXDecimal rhs) {
     lhs.x /= rhs;
     lhs.y /= rhs;
     lhs.z /= rhs;
 }
 
-string operator+(string lhs, RMXDouble rhs) {
+string operator+(string lhs, RMXDecimal rhs) {
     return lhs + to_string(rhs);
 }
 
-string operator+(RMXDouble lhs, string rhs) {
+string operator+(RMXDecimal lhs, string rhs) {
     return to_string(lhs) + rhs;
 }
 
-string& operator+=(string& lhs, RMXDouble rhs) {
+string& operator+=(string& lhs, RMXDecimal rhs) {
     return lhs += to_string(rhs);
 }
 
-string S(RMXDouble f) {
+string S(RMXDecimal f) {
     return to_string(f);
 }
 
@@ -243,7 +248,7 @@ bool operator!=(Matrix4 lhs,  Matrix4 rhs) {
 }
 
 
-RMXDouble rBounds(int min, int max) {
+RMXDecimal rBounds(int min, int max) {
 
     return random() % (max - min) + min;
 }

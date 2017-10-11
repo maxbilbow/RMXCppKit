@@ -26,7 +26,7 @@
 
 
 
-#import "NodeComponent.hpp"
+#import "NodeComponent.h"
 #import "CollisionBody.hpp"
 #import "BoundingBox.hpp"
 #import "BoundingSphere.hpp"
@@ -38,7 +38,7 @@
 #import "Delegates.hpp"
 #import "Scene.hpp"
 #import "GameView.hpp"
-#import "Camera.hpp"
+#import "Camera.h"
 #import "EntityGenerator.hpp"
 #import "GameController.hpp"
 #import "GameNode.hpp"

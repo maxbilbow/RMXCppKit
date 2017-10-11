@@ -8,7 +8,7 @@
 //#import <iostream>
 #import "Includes.h"
 #import "GameNode.hpp"
-#import "NodeComponent.hpp"
+#import "NodeComponent.h"
 #import "Transform.hpp"
 //#import "NodeComponent.hpp"
 

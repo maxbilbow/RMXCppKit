@@ -7,7 +7,7 @@
 //
 #include "Includes.h"
 #include "Scene.hpp"
-#include "NodeComponent.hpp"
+#include "NodeComponent.h"
 #include "Transform.hpp"
 
 #include "GameNode.hpp"

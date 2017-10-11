@@ -10,9 +10,8 @@
 #define EventListener_h
 
 
-#endif /* EventListener */
-#import <iostream>
-#import "Object.h"
+
+#include <iostream>
 
 namespace rmx {
     /*!
@@ -23,12 +22,12 @@ namespace rmx {
      *   @see NotificationCenter
      *   @since 0.1
      */
-    class EventListener : public Object {
+    class EventListener {
         ///Private initilization adds this object to NotificationCenter::listeners iff add == true;
         ///@see NotificationCenter::listeners
         void init(bool add = true);
     public:
-        typedef std::string AnEvent;
+        typedef const std::string& AnEvent;
         typedef void * EventArgs;
         
         /*!
@@ -40,7 +39,7 @@ namespace rmx {
          *  @see Object
          *  @since <#0.1#>
          */
-        EventListener(std::string name = "", bool add = true):Object(name) {
+        explicit EventListener(const std::string &name = "", bool add = true) {
             this->init(add);
         }
 
@@ -54,11 +53,7 @@ namespace rmx {
          *  @param args     anything
          *  @since 0.1
          */
-        virtual void OnEventDidStart(AnEvent theEvent, EventArgs args) {
-            #ifdef DEBUG
-            std::cout << this << "\n       Event Started: " << theEvent << ", with args: " << args << std::endl << std::endl;
-            #endif
-        }
+        virtual void OnEventDidStart(AnEvent theEvent, EventArgs args);
         
         /*!
          *  @author Max Bilbow, 15-08-04 16:08:53
@@ -68,11 +63,7 @@ namespace rmx {
          *  @param args     anything
          *  @since 0.1
          */
-        virtual void OnEventDidEnd(AnEvent theEvent, EventArgs args) {
-            #ifdef DEBUG
-            std::cout << this << "\n         Event Ended: " << theEvent << ", with args: " << args << std::endl << std::endl;
-            #endif
-        }
+        virtual void OnEventDidEnd(AnEvent theEvent, EventArgs args);
 
         
         /*!
@@ -85,11 +76,7 @@ namespace rmx {
          *   @param args    any object.
          *   @since 0.1
          */
-        virtual void SendMessage(AnEvent message, EventArgs args = nullptr){
-            #ifdef DEBUG
-            std::cout << this << "\n    Message Received: " << message << std::endl << std::endl;
-            #endif
-        }
+        virtual void SendMessage(AnEvent message, EventArgs args);
 
         /*!
          *   @author Max Bilbow, 15-08-04 16:08:22
@@ -110,15 +97,12 @@ namespace rmx {
          */
         void StopListening();
 
-        
-        ///Extends the Object::clone() method so that the listening status of the object is also copied.
-        ///@see NotificationCenter::addListener(listener);
-        EventListener * clone() override;
-
     };
 
 }
 
+
+#endif /* EventListener */
 
 
 

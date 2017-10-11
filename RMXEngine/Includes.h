@@ -10,16 +10,10 @@
 #define Includes_h
 
 
-#endif /* Includes_h */
 #import <iostream>
 
-#include "../RMXMaths/types.h"
+#include "../RMXMaths/RMXMaths.h"
 //
-typedef rmx::Matrix4 Matrix4;
-typedef rmx::Vector3 Vector3;
-typedef rmx::Vector4 Vector4;
-typedef rmx::Quaternion Quaternion;
-typedef Vector3 EulerAngles;
 
 //typedef int BOOL;
 #define TRUE 1
@@ -27,7 +21,7 @@ typedef Vector3 EulerAngles;
 //typedef nullptr null;
 //#define null nullptr
 
-#include "../RMXKit/Headers/RMXKit.h"
+#include "../RMXKit/RMXKit.h"
 #include "RMXMath.hpp"
 
 
@@ -78,3 +72,6 @@ enum RMXMessage {
     Pitch, Yaw, Roll,
     Jump
 };
+
+
+#endif /* Includes_h */

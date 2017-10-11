@@ -9,9 +9,9 @@
 #import "Includes.h"
 
 
-#import "NodeComponent.hpp"
+#import "NodeComponent.h"
 #import "Transform.hpp"
-#import "Camera.hpp"
+#import "Camera.h"
 #import "GameNode.hpp"
 #import "PhysicsWorld.hpp"
 #import "Scene.hpp"

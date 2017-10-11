@@ -9,22 +9,10 @@
 #ifndef Object_hpp
 #define Object_hpp
 
-#include <stdio.h>
-
-
-
-#endif /* Object_hpp */
-
-#import <iostream>
-#import <type_traits>
-#import "LinkedList.h"
-
+#include <iostream>
+#include <typeinfo>
 
 namespace rmx {
-
-    enum SendMessageOptions {
-        RequiresReceiver, DoesNotRequireReceiver
-    };
 
     /*!
      *   @author Max Bilbow, 15-08-04 16:08:04
@@ -49,13 +37,9 @@ namespace rmx {
     protected:
         std::string description = "";
     public:
-        virtual std::string ToString() {
-            return this->description.empty() ? "N/A" : this->description;
-        }
+        virtual std::string ToString();
         
-        virtual void setDescription(std::string description) {
-            this->description = description;
-        }
+        virtual void setDescription(std::string description);
     };
 }
 
@@ -79,15 +63,13 @@ std::ostream& operator<<(std::ostream &strm,  rmx::Printable * a);
 
 namespace rmx {
 
-    typedef void* Any;
-    
     /*!
      *  @author Max Bilbow, 15-08-04 17:08:49
      *
      *  Base object for all standart event listening and notification tools.
      *  @since 0.1
      */
-    class Object : public Printable {
+    class Object : public Printable  {
         
         /*!
          *  @author Max Bilbow, 15-08-06 17:08:35
@@ -97,14 +79,7 @@ namespace rmx {
          */
         static unsigned int _count;
 
-        /*!
-         *  @author Max Bilbow, 15-08-06 17:08:33
-         *
-         *  A static collection of all active Object instances.
-         *  @see LinkedList<Value>
-         *  @since 0.1
-         */
-        static LinkedList<Object> _allObjects __deprecated_enum_msg("possibly unessecary and dangerous");
+
         
         /*!
          *  @author Max Bilbow, 15-08-06 17:08:13
@@ -124,13 +99,7 @@ namespace rmx {
          *  @since 0.1
          */
         std::string name;
-        
-        
-//        void didStartEvent(std::string event, void* args = nullptr);
-//        void didCauseEvent(char * event, void* args = nullptr) {
-//           
-//        }
-//        void didFinishEvent(std::string event, void* args = nullptr);
+
 
     public:
         
@@ -152,22 +121,12 @@ namespace rmx {
         unsigned int uniqueID();
         
         /*!
-         *  @author Max Bilbow, 15-08-04 17:08:40
-         *
-         *  @return A LinkedList containing all available Objects.
-         *  @since 0.1
-         */
-        static LinkedList<Object> * AllObjects() __deprecated_enum_msg("possibly unessecary and dangerous") {
-            return &Object::_allObjects;
-        }
-        
-        /*!
          *  @author Max Bilbow, 15-08-06 16:08:41
          *
          *  Initiates with default name "Unnamed Object"
          *  @since 0.1
          */
-        Object(std::string name = "Unnamed Object");
+        explicit Object(const std::string & name = "Unnamed Object");
        
         /*!
          *  @author Max Bilbow, 15-08-06 17:08:14
@@ -236,42 +195,7 @@ namespace rmx {
         std::string ClassName() {
             return typeid(this).name();
         };
-        
-        /*!
-         *  @author Max Bilbow, 15-08-06 16:08:42
-         *
-         *  @discussion Does not currently work as desired. Not sure if messages sending,
-         *  in this mannor is possible in c++ without excessive overhead.
-         *  It might be possible to externally reference Objective-C but 
-         *  probably not an ideal solution.
-         *
-         *  @param message the name of the method to call
-         *  @param args    any value
-         *  @param options e.g. should an error be thrown if no receiver present?
-         *  @since 0.1
-         *  @TODO: find a way of making this work...
-         */
-        virtual void SendMessage(std::string message, void * args = nullptr, SendMessageOptions options = DoesNotRequireReceiver) {
-#if RMX_DEBUG_OBJECT
-            std::cout << message << std::endl;
-#endif
-        }
-        
-        virtual void BroadcastMessage(std::string message, void * args = nullptr, SendMessageOptions options = DoesNotRequireReceiver) {
-            this->SendMessage(message, args, options);
-        }
-        
-        
 
-        /*!
-         *  @author Max Bilbow, 15-08-06 16:08:43
-         *
-         *
-         *  @return A LinkedList<Object>:Iterator containing all available Objects in the system.
-         *  @since 0.1
-         */
-        static LinkedList<Object>::Iterator * ObjectIterator() __deprecated_enum_msg("possibly unessecary and dangerous");
-        
         
         /*!
          *  @author Max Bilbow, 15-08-06 17:08:26
@@ -286,40 +210,15 @@ namespace rmx {
          *  @since 0.1
          *  @see clone()
          */
-        template<class T> static T * Instantiate(T * object) {
-            //            if( Object * o = dynamic_cast< Object* >( object ) )
-            if (std::is_base_of<Object,T>::value) {
-                #if DEBUG_MALLOC
-                std::cout << "Object::";
-                #endif
-                return (T*) ((Object*) object)->clone();
-            } else {
-                void * ptr = malloc(sizeof(*object));//&o;
-                memcpy(ptr, (void*)object, sizeof(*object));
-                #if DEBUG_MALLOC
-                std::cout << "~UNKNOWN CLONE: " << ptr << std::endl;
-                #endif
-                return (T*) ptr;
-            }
+        template<class T> static T * Instantiate(T * object);
 
-        }
-        
-        
-        /*!
-         *  @author Max Bilbow, 15-08-06 17:08:58
-         *
-         *  Removes a gameobject, component or asset by calling delete.
-         *  @TODO: Make destruction safe as with Unity's GameObject.Destroy function.
-         *  @param object Anything
-         *  @since 0.1
-         */
-        template <class T> static void Destroy(T * object) {
-            delete object; //TODO Dont destroy immediately.
-        }
-        
     };
     
 }
+
+
+#endif /* Object_hpp */
+
 
 
 

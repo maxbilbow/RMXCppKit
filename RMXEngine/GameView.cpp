@@ -12,7 +12,7 @@
 #import "Scene.hpp"
 
 #import "Transform.hpp"
-#import "NodeComponent.hpp"
+#import "NodeComponent.h"
 #import "GameNode.hpp"
 #import "Behaviour.hpp"
 #import "PhysicsBody.hpp"

@@ -10,7 +10,7 @@
 //#include <iostream>
 
 //#include "Tests.h"
-#import "Tests.h"
+#import "../tests/RMXKit/Tests.h"
 
 #include "LinkedList.h"
 

@@ -10,7 +10,6 @@
 #define Tests_h
 
 
-#endif /* Tests_h */
 
 #define DEBUG_ALL                           0
 #define DEBUG_MALLOC                        DEBUG_ALL || 0
@@ -44,3 +43,6 @@ void RMXBehaviourTest();
 /// • Object::Instantiate(Object inheritance)
 /// • Event Listening with cloned objects
 void RMXEventListenerTest();
+
+
+#endif /* Tests_h */

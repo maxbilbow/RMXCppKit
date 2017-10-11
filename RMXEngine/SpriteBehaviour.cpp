@@ -9,7 +9,7 @@
 #include "Includes.h"
 
 #include "GameNode.hpp"
-#include "NodeComponent.hpp"
+#include "NodeComponent.h"
 #include "Transform.hpp"
 #include "PhysicsBody.hpp"
 #include "Behaviour.hpp"

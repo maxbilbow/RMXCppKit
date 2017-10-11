@@ -7,11 +7,9 @@ set(CMAKE_CXX_STANDARD 17)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
 
-set(SOURCE_FILES main.cpp  RMXMaths/operations.h RMXMaths/RMXMaths.h RMXMaths/operations.cpp RMXMaths/raw_types.h RMXMaths/raw_types.cpp games/main.cpp tests/TestCase.cpp tests/TestCase.h tests/RMXEngine/CameraTest.cpp)
+set(SOURCE_FILES main.cpp ../RMXMaths/operations.h ../RMXMaths/RMXMaths.h ../RMXMaths/operations.cpp ../RMXMaths/raw_types.h ../RMXMaths/raw_types.cpp)
 add_executable(RMXCppKit ${SOURCE_FILES})
 
-add_subdirectory(tests/RMXEngine)
-add_subdirectory(tests/RMXKit)
 #include_directories("RMXKit/headers")
 
 link_libraries(glfw)

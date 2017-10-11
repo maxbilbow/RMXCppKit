@@ -9,12 +9,12 @@
 
 #import "Includes.h"
 
-#import "NodeComponent.hpp"
+#import "NodeComponent.h"
 #import "Transform.hpp"
 #import "Geometry.hpp"
 #import "CollisionBody.hpp"
 #import "Scene.hpp"
-#import "Camera.hpp"
+#import "Camera.h"
 #import "PhysicsBody.hpp"
 #import "Behaviour.hpp"
 

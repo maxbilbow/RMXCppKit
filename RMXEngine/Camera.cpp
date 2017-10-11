@@ -6,15 +6,16 @@
 //  Copyright © 2015 Rattle Media Ltd. All rights reserved.
 //
 
-#import "Includes.h"
+//#import "Includes.h"
 
-#import "NodeComponent.hpp"
-#import "Transform.hpp"
+#include "NodeComponent.h"
+#include "Transform.hpp"
 //#import <GLFW/glfw3.h>
-#import "GameView.hpp"
-#import "GameNode.hpp"
-#import "Camera.hpp"
-#import <math.h>
+#include "GameView.hpp"
+#include "GameNode.hpp"
+#include "../RMXMaths/RMXMaths.h"
+#include "Camera.h"
+#include <cmath>
 
 
 using namespace rmx;

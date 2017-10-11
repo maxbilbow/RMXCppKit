@@ -9,12 +9,11 @@
 #ifndef Camera_hpp
 #define Camera_hpp
 
-#include <stdio.h>
+#include "NodeComponent.h"
+#include <iostream>
 
-#endif /* Camera_hpp */
-//#import "GameView.hpp"
 namespace rmx {
-    
+
     class Camera : public NodeComponent { //, public _Camera {
         float fovX, fovY, nearZ, farZ, aspect;
         Matrix4 _projectionMatrix;
@@ -33,10 +32,11 @@ namespace rmx {
         void setFovX(float fovX);
         float getNearZ();
         void setNearZ(float nearZ);
-        
+
 
 
     };
-    
-    
+
+
 }
+#endif /* Camera_hpp */

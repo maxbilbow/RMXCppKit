@@ -4,6 +4,15 @@
 using namespace rmx;
 using namespace std;
 
+struct u_test {
+    union {
+        struct {
+            int a, b, c;
+        };
+        int n[3];
+    };
+};
+
 int main() {
     cout << "Hello, World!" << endl;
 
@@ -13,5 +22,13 @@ int main() {
         m4[i] = i;
     cout << m4 << endl;
 
+
+     u_test uTest;
+    uTest.a = 1;
+    uTest.b = 2;
+    uTest.c = 3;
+
+    cout << uTest.a     << ", " << uTest.b      << ", " << uTest.c      << endl;
+    cout << uTest.n[0]  << ", " << uTest.n[1]   << ", " << uTest.n[2]   << endl;
     return 0;
 }

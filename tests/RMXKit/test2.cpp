@@ -10,7 +10,7 @@
 #include <iostream>
 #include <string.h>
 #include <stdio.h>
-#include "test2.hpp"
+#include "Tests.h"
 using namespace std;
 
 #define ARRAY_SIZE(A) sizeof(A)/sizeof(A[0])
