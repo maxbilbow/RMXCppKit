@@ -10,7 +10,6 @@
 #define Object_hpp
 
 #include <iostream>
-#include <typeinfo>
 
 namespace rmx {
 
@@ -35,11 +34,8 @@ namespace rmx {
     class Printable {
         
     protected:
-        std::string description = "";
     public:
-        virtual std::string ToString();
-        
-        virtual void setDescription(std::string description);
+        virtual std::string toString() = 0;
     };
 }
 
@@ -47,7 +43,7 @@ namespace rmx {
  *  @author Max Bilbow, 15-08-04 17:08:53
  *  @param strm proceeding output
  *  @param a    the Printable object
- *  @return Prints the object's details, including location in memory, along with it's ToString() method
+ *  @return Prints the object's details, including location in memory, along with it's toString() method
  *  @since 0.1
  */
 std::ostream& operator<<(std::ostream &strm,  rmx::Printable &a);
@@ -56,7 +52,7 @@ std::ostream& operator<<(std::ostream &strm,  rmx::Printable &a);
  *  @author Max Bilbow, 15-08-04 17:08:54
  *  @param strm proceeding output
  *  @param a    the Printable object pointer
- *  @return Prints the object's ToString() method
+ *  @return Prints the object's toString() method
  *  @since 0.1
  */
 std::ostream& operator<<(std::ostream &strm,  rmx::Printable * a);
@@ -89,6 +85,7 @@ namespace rmx {
          */
         unsigned int _id = 0;
 
+        std::string mDescription;
         
     protected:
        
@@ -102,7 +99,12 @@ namespace rmx {
 
 
     public:
-        
+
+        void setDescription(const std::string &aDescription)
+        {
+            mDescription = aDescription;
+        }
+
         /*!
          *  @author Max Bilbow, 15-08-06 17:08:50
          *
@@ -155,7 +157,7 @@ namespace rmx {
          *  @see uniqueName()
          */
         std::string Name();
-        
+
         /*!
          *  @author Max Bilbow, 15-08-06 16:08:25
          *
@@ -164,7 +166,7 @@ namespace rmx {
          *  @since 0.1
          *  @see Printable
          */
-        virtual std::string ToString() override;
+        std::string toString() override;
         
         /*!
          *  @author Max Bilbow, 15-08-06 16:08:12
@@ -174,7 +176,10 @@ namespace rmx {
          *  @since 0.1
          *  @see uniqueName()
          */
-        void setName(std::string name);
+        void setName(std::string aName)
+        {
+            name = std::move(aName);
+        }
         
         /*!
          *  @author Max Bilbow, 15-08-06 16:08:40
@@ -192,9 +197,7 @@ namespace rmx {
          *  @return the classname of the object as a string
          *  @since 0.2
          */
-        std::string ClassName() {
-            return typeid(this).name();
-        };
+        std::string ClassName();
 
         
         /*!

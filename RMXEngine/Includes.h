@@ -10,10 +10,8 @@
 #define Includes_h
 
 
-#import <iostream>
+#include <iostream>
 
-#include "../RMXMaths/RMXMaths.h"
-//
 
 //typedef int BOOL;
 #define TRUE 1
@@ -21,9 +19,8 @@
 //typedef nullptr null;
 //#define null nullptr
 
-#include "../RMXKit/RMXKit.h"
-#include "RMXMath.hpp"
-
+#include <LinkedList.h>
+#include <Dictionary.h>
 
 //
 //#include <vector>

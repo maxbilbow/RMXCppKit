@@ -10,8 +10,9 @@
 #define NodeComponent_hpp
 
 #include <iostream>
-
-#endif /* NodeComponent_hpp */
+#include <Object.h>
+#include <GameNode.hpp>
+#include <Transform.hpp>
 
 namespace rmx {
     
@@ -44,3 +45,5 @@ namespace rmx {
     };
 
 }
+
+#endif /* NodeComponent_hpp */

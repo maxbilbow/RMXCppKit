@@ -11,7 +11,6 @@
 
 #include <stdio.h>
 //#import <iostream>
-#endif /* Node_h */
 
 
 namespace rmx {
@@ -130,3 +129,6 @@ namespace rmx {
     
 
 }
+
+
+#endif /* Node_h */

@@ -9,16 +9,18 @@
 #ifndef Transform_hpp
 #define Transform_hpp
 
-#include <stdio.h>
-
-#endif /* Transform_hpp */
+#include <cstdio>
+#include <Includes.h>
+#include <Object.h>
+#include <RMXMaths.h>
+#include <NotificationCenter.h>
 //#import "Node.hpp"
 
 
 namespace rmx{
    
    
-    class Transform : public NodeComponent {
+    class Transform : public Object /*NodeComponent*/ {
 //        Matrix4 _worldMatrix;
         Matrix4 _axis;
         Matrix4 _localMatrix;
@@ -102,3 +104,5 @@ namespace rmx{
     };
 
 }
+
+#endif /* Transform_hpp */

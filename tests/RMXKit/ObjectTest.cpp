@@ -1,20 +1,33 @@
 //
 // Created by max on 10/10/17.
 //
-#define DEBUG_THIS 1
-//#include "Tests.h"
-#define DEBUG_MALLOC true
+//#define DEBUG_RMX_OBJECT
+//#define DEBUG_MALLOC
 
-#include "../../RMXKit/Object.h"
-#include "../../RMXKit/EventListener.h"
+#include "Object.h"
+#define DEBUG_THIS true
 
 using namespace rmx;
 using namespace std;
 
+class PrintableTest : public Printable
+{
+    string mDesc;
+public:
+
+    explicit PrintableTest(const string& aDesc)
+    {
+        mDesc = aDesc;
+    }
+
+    string toString() override
+    {
+        return mDesc;
+    }
+};
 void RMXPrintableTest() {
     std::cout <<   "\n******** BEGIN TEST: PRINTABLE ********\n" << std::endl;
-    Printable * theObject = new Printable();
-    theObject->setDescription("Hello, World!");
+    auto * theObject = new PrintableTest("Hello, world");
 #if DEBUG_THIS || DEBUG_RMX_PRINTABLE
     cout << theObject << endl;
     cout << *theObject << endl;
@@ -38,19 +51,15 @@ void RMXObjectCountInitAndDeinitTest() {
 #endif
 
 
-    AnObject * thing = new AnObject();
+    auto * thing = new AnObject();
 #if DEBUG_THIS || D_ObjectCountInitAndDeinitTest
     cout << "++Objects: " << Object::Count() << endl;
 #endif
-    AnObject * thing2 = new AnObject();
+    auto * thing2 = new AnObject();
 #if DEBUG_THIS || D_ObjectCountInitAndDeinitTest
     cout << "++Objects: " << Object::Count() << endl;
 #endif
-    AnObject * thing3 = (AnObject*) thing->clone();
-#if DEBUG_THIS || D_ObjectCountInitAndDeinitTest
-    cout << "++Objects: " << Object::Count() << endl;
-#endif
-    EventListener * thing4 = new EventListener();
+    auto * thing3 = (AnObject*) thing->clone();
 #if DEBUG_THIS || D_ObjectCountInitAndDeinitTest
     cout << "++Objects: " << Object::Count() << endl;
 #endif
@@ -64,10 +73,6 @@ void RMXObjectCountInitAndDeinitTest() {
     cout << "--Objects: " << Object::Count() << endl;
 #endif
     delete thing3;
-#if DEBUG_THIS || D_ObjectCountInitAndDeinitTest
-    cout << "--Objects: " << Object::Count() << endl;
-#endif
-    delete thing4;
 #if DEBUG_THIS || D_ObjectCountInitAndDeinitTest
     cout << "--Objects: " << Object::Count() << endl;
 #endif
@@ -110,7 +115,7 @@ void RMXObjectCloneTest(){
     Thing * baz = Object::Instantiate(&barry);
     baz->name = "And I'm his bloody clone!";
 #if DEBUG_THIS
-    cout << "\nto_string:       " << o->ToString() << endl;
+    cout << "\nto_string:       " << o->toString() << endl;
     cout << "\npointer o:       " << o << endl;
     cout << "\npointer2 o2:     " << o2 << endl;
     cout << "\nclone pointer:   " << clone << endl;
@@ -133,6 +138,9 @@ void RMXObjectCloneTest(){
     //    NotificationCenter::Test();
     std::cout <<   "\n********   END TEST: Object Cloning ********\n" << std::endl;
 }
+
+
+
 
 int main()
 {
