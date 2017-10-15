@@ -8,9 +8,8 @@
 #ifndef LinkedList_cpp
 #define LinkedList_cpp
 
-#endif /* LinkedList_cpp */
 
-#import <iostream>
+#include <iostream>
 
 namespace rmx {
     
@@ -527,3 +526,5 @@ namespace rmx {
         
     }
 }
+
+#endif /* LinkedList_cpp */

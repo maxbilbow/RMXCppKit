@@ -180,16 +180,7 @@ namespace rmx {
         {
             name = std::move(aName);
         }
-        
-        /*!
-         *  @author Max Bilbow, 15-08-06 16:08:40
-         *
-         *  Clones the object and makes sure that the name and ID are updated accordingly.
-         *  This should be overridden, with inherited mathods invoked first, to include custom modifiers on any decendants.
-         *  @return a clone of the object
-         *  @since 0.1
-         */
-        virtual Object * clone();
+
        
         /*!
          *  @author Max Bilbow, 15-08-06 16:08:21
@@ -199,21 +190,6 @@ namespace rmx {
          */
         std::string ClassName();
 
-        
-        /*!
-         *  @author Max Bilbow, 15-08-06 17:08:26
-         *
-         *  Clones the object original and returns the clone.
-            If the object is of type rmx::Object, then it's clone() method is called
-            Otherwise the instance is cloned in memory and may need additional modification 
-            (i.e. uniqueID, pointers, etc... that should not match that of the original.
-         *
-         *  @param object anything
-         *  @return a unique copy of the input or the instance's Object::clone result.
-         *  @since 0.1
-         *  @see clone()
-         */
-        template<class T> static T * Instantiate(T * object);
 
     };
     

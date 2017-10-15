@@ -6,24 +6,24 @@
 //  Copyright © 2015 Rattle Media Ltd. All rights reserved.
 //
 
-#import "../tests/RMXKit/Tests.h"
-#import "EventListener.h"
-#import "NotificationCenter.h"
+#include "EventListener.h"
+#include "NotificationCenter.h"
 
 #ifdef DEBUG_RMX_EVENT_LISTENER
 #define DEBUG_THIS true
+#endif
 
 using namespace rmx;
 using namespace std;
 
 void EventListener::init(bool add) {
     if (add)
-        NotificationCenter::addListener(this);
+        NotificationCenter::getInstance()->addListener(this);
 }
 
 EventListener::~EventListener(){
     try {
-        NotificationCenter::removeListener(this);
+        NotificationCenter::getInstance()->removeListener(this);
         //    Object::~Object();
 #if DEBUG_MALLOC
         cout << "~DELETING EventListener: " << *this << endl;
@@ -36,11 +36,11 @@ EventListener::~EventListener(){
 
 
 void EventListener::StartListening() {
-    NotificationCenter::addListener(this);
+    NotificationCenter::getInstance()->addListener(this);
 }
 
 void EventListener::StopListening() {
-    NotificationCenter::removeListener(this);
+    NotificationCenter::getInstance()->removeListener(this);
 }
 
 void EventListener::SendMessage(const string &message, EventListener::EventArgs args) {
@@ -63,3 +63,4 @@ void EventListener::OnEventDidStart(const string &theEvent, EventListener::Event
 
 #ifdef DEBUG_THIS
 #undef DEBUG_THIS
+#endif

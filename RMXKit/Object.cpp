@@ -84,38 +84,6 @@ Object::~Object() {
     }
 }
 
-Object * Object::clone() {
-    void * ptr = malloc(sizeof(*this));//&o;
-    memcpy(ptr, (void*)this, sizeof(*this));
-    auto * o = (Object *) ptr;
-    o->_id = _count++;
-    if (o->name.find("CLONE of \"") == std::string::npos)
-        o->setName("CLONE of \"" + this->name + "\"");// + std::to_string(this->getID()) + ")");
-//    Object::_allObjects.append(o);
-#if DEBUG_MALLOC
-    std::cout << "~INITIALIZING CLONE: " << *o << std::endl;
-#endif
-    return o;
-}
-
-template<class T>
-T *Object::Instantiate(T *object) {
-    //            if( Object * o = dynamic_cast< Object* >( object ) )
-    if (std::is_base_of<Object,T>::value) {
-#if DEBUG_MALLOC
-        std::cout << "Object::";
-#endif
-        return (T*) ((Object*) object)->clone();
-    } else {
-        void * ptr = malloc(sizeof(*object));//&o;
-        memcpy(ptr, (void*)object, sizeof(*object));
-#if DEBUG_MALLOC
-        std::cout << "~UNKNOWN CLONE: " << ptr << std::endl;
-#endif
-        return (T*) ptr;
-    }
-
-}
 
 #ifdef DEBUG_THIS
 #undef DEBUG_THIS

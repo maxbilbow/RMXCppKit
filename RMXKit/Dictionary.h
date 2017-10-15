@@ -9,11 +9,8 @@
 #ifndef Dictionary_cpp
 #define Dictionary_cpp
 
-
-#endif /* Dictionary_cpp */
-
-#import <iostream>
-#import "LinkedList.h"
+#include <iostream>
+#include "LinkedList.h"
 
 
 namespace rmx {
@@ -91,3 +88,5 @@ namespace rmx {
     };
     
 }
+
+#endif /* Dictionary_cpp */

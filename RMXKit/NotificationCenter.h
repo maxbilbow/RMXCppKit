@@ -9,23 +9,18 @@
 #ifndef RMXNotificationCenter_cpp
 #define RMXNotificationCenter_cpp
 
-//#include <stdio.h>
-//#import <list>
-//#import <vector>
+
+#define EVENT_STATUS_IDLE       0
+#define EVENT_STATUS_ACTIVE     1
+#define EVENT_STATUS_COMPLETE   2
+#define EVENT_STATUS_FAILURE    3
 
 
-
-
-#define EVENT_STATUS_IDLE       0ui
-#define EVENT_STATUS_ACTIVE     1ui
-#define EVENT_STATUS_COMPLETE   2ui
-#define EVENT_STATUS_FAILURE    3ui
-
-
-#include "LinkedList.h"
-#include "Dictionary.h"
+//#include "LinkedList.h"
+//#include "Dictionary.h"
 #include "EventListener.h"
-
+#include <list>
+#include <map>
 
 
 namespace rmx {
@@ -33,7 +28,7 @@ namespace rmx {
     /*!
      *   @author Max Bilbow, 15-08-04 16:08:21
      *
-     *   @brief  static class for handling global notifications throughout a system.
+     *   @brief  class for handling global notifications throughout a system.
      *
      *   @since <#0.1#>
      */
@@ -41,7 +36,7 @@ namespace rmx {
     public:
         typedef void * EventArgs;
         typedef std::string EventType;
-        typedef unsigned short EventStatus;
+        typedef unsigned int EventStatus;
     private:
         /*!
          *  @author Max Bilbow, 15-08-04 17:08:42
@@ -49,59 +44,63 @@ namespace rmx {
          *  @see EventListener::EventListener(std::string name, bool add);
          *  @since 0.1
          */
-        static LinkedList<EventListener> * listeners;
+        std::list<EventListener*> listeners;
+//        LinkedList<EventListener> * listeners;
         
         /*!
          *  @author Max Bilbow, 15-08-04 17:08:42
          *  Dictionaty containing all events, that have been activated at least once, and their statuses.
          *  @since 0.1
          */
-        static Dictionary<EventType, EventStatus> * events;
+        std::map<EventType, EventStatus> events;
+
+//        Dictionary<EventType, EventStatus> * events;
 
     public:
-        
+
+        static NotificationCenter * getInstance();
         /*!
          *  @author Max Bilbow, 15-08-04 17:08:42
          *  Returns true if the listener exists withing listeners
          *  i.e. The given listener is listening.
          *  @since 0.1
          */
-        static bool hasListener(EventListener * listener);
+        bool hasListener(EventListener * listener);
         
         /*!
          *  @author Max Bilbow, 15-08-04 17:08:42
          *  If the given EventType exists and is not Idle, the event's status is set to EVENT_STATUS_IDLE.
          *  @since 0.1
          */
-        static void reset(EventType theEvent);
+        void reset(EventType theEvent);
         
         /*!
          *  @author Max Bilbow, 15-08-04 17:08:42
          *  Adds the given listerner to listenrers iff it does not already exist (i.e. is already listening)
          *  @since 0.1
          */
-        static void addListener(EventListener * listener);
+        void addListener(EventListener * listener);
         
         /*!
          *  @author Max Bilbow, 15-08-04 17:08:42
          *  Removes the given listener from the list (i.e. it stops listening)
          *  @since 0.1
          */
-        static EventListener * removeListener(EventListener * listener);
+        EventListener * removeListener(EventListener * listener);
         
         /*!
          *  @author Max Bilbow, 15-08-04 17:08:42
          *  Returns the status of a given EventType or the default 'Idle' if the EventType was never started.
          *  @since 0.1
          */
-        static EventStatus statusOf(EventType theEvent);
+        EventStatus statusOf(EventType theEvent);
         
         /*!
          *  @author Max Bilbow, 15-08-04 17:08:42
          *  Returns true iff an event is EVENT_STATUS_IDLE or non-existent
          *  @since 0.1
          */
-        static bool isIdle(EventType theEvent);
+        bool isIdle(EventType theEvent);
         
         /*!
          *  @author Max Bilbow, 15-08-04 17:08:42
@@ -109,7 +108,7 @@ namespace rmx {
          *  Returns true iff an event is EVENT_STATUS_ACTIVE
          *  @since 0.1
          */
-        static bool isActive(EventType theEvent) ;
+        bool isActive(EventType theEvent) ;
         
         /*!
          *  @author Max Bilbow, 15-08-04 17:08:42
@@ -122,7 +121,7 @@ namespace rmx {
          *  @see Calls eventWillStart(EventType theEvent, EventArgs o), @see eventDidEnd(EventType theEvent, EventArgs o)
          *  @since 0.1
          */
-        static void eventDidOccur(EventType theEvent, EventArgs o = nullptr);
+        void eventDidOccur(EventType theEvent, EventArgs o = nullptr);
        
         /*!
          *  @author Max Bilbow, 15-08-04 17:08:42
@@ -134,7 +133,7 @@ namespace rmx {
          *  @endcode
          *  @since 0.1
          */
-        static bool isComplete(EventType theEvent);
+        bool isComplete(EventType theEvent);
         
         /*!
          *  @author Max Bilbow, 15-08-04 17:08:42
@@ -146,7 +145,7 @@ namespace rmx {
          *  @endcode
          *  @since 0.1
          */
-        static bool didFail(EventType theEvent);
+        bool didFail(EventType theEvent);
         
         /*!
          *  @author Max Bilbow, 15-08-04 17:08:42
@@ -161,7 +160,7 @@ namespace rmx {
          *  @see eventDidEnd(EventType theEvent, EventArgs o)
          *  @since 0.1
          */
-        static void eventWillStart(EventType theEvent, EventArgs o = nullptr);
+        void eventWillStart(EventType theEvent, EventArgs o = nullptr);
 
         /*!
          *  @author Max Bilbow, 15-08-04 17:08:17
@@ -178,7 +177,7 @@ namespace rmx {
          *  @param o       anything
          *  @since 0.1
          */
-        static void eventDidEnd(EventType theEvent, EventArgs o = nullptr);
+        void eventDidEnd(EventType theEvent, EventArgs o = nullptr);
         
         /*!
          *  @author Max Bilbow, 15-08-04 17:08:52
@@ -190,7 +189,7 @@ namespace rmx {
          *  @param args    anything
          *  @since 0.1
          */
-        static void notifyListeners(std::string message, EventArgs args = nullptr);
+        void notifyListeners(std::string message, EventArgs args = nullptr);
 
         
     };
