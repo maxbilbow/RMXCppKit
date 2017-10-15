@@ -15,16 +15,55 @@
 #define EVENT_STATUS_COMPLETE   2
 #define EVENT_STATUS_FAILURE    3
 
+#define EventStatus unsigned short
+#define EventArgs void *
+#define AnEvent std::string
 
 //#include "LinkedList.h"
 //#include "Dictionary.h"
-#include "EventListener.h"
 #include <list>
 #include <map>
 
 
 namespace rmx {
-    
+
+    class EventListener {
+
+    public:
+//        typedef const std::string& AnEvent;
+        /*!
+         *  @author Max Bilbow, 15-08-04 16:08:30
+         *
+         *  Notify's all active listeners that an event is about to start
+         *  @param theEvent as string
+         *  @param args     anything
+         *  @since 0.1
+         */
+        virtual void onEventDidStart(AnEvent theEvent, EventArgs args) = 0;
+
+        /*!
+         *  @author Max Bilbow, 15-08-04 16:08:53
+         *
+         *  Notify's all active listeners that an event did start
+         *  @param theEvent string identifier
+         *  @param args     anything
+         *  @since 0.1
+         */
+        virtual void onEventDidEnd(AnEvent theEvent, EventArgs args) = 0;
+
+
+        /*!
+         *   @author Max Bilbow, 15-08-04 16:08:55
+         *
+         *   Receives a message
+         *   Has to be overridden for to add specific method handing
+         *   as it is currently not automatic to call a method this way
+         *   @param message Name of selector or any other message
+         *   @param args    any object.
+         *   @since 0.1
+         */
+        virtual void sendMessage(AnEvent message, EventArgs args) = 0;
+    };
     /*!
      *   @author Max Bilbow, 15-08-04 16:08:21
      *
@@ -34,9 +73,9 @@ namespace rmx {
      */
     class NotificationCenter {
     public:
-        typedef void * EventArgs;
+
         typedef std::string EventType;
-        typedef unsigned int EventStatus;
+//        typedef unsigned int EventStatus;
     private:
         /*!
          *  @author Max Bilbow, 15-08-04 17:08:42
@@ -44,15 +83,15 @@ namespace rmx {
          *  @see EventListener::EventListener(std::string name, bool add);
          *  @since 0.1
          */
-        std::list<EventListener*> listeners;
-//        LinkedList<EventListener> * listeners;
+        std::list<EventListener*> listeners = std::list<EventListener*>();
+//        LinkedList<SimpleEventListener> * listeners;
         
         /*!
          *  @author Max Bilbow, 15-08-04 17:08:42
          *  Dictionaty containing all events, that have been activated at least once, and their statuses.
          *  @since 0.1
          */
-        std::map<EventType, EventStatus> events;
+        std::map<EventType, EventStatus> events = std::map<EventType, EventStatus>();
 
 //        Dictionary<EventType, EventStatus> * events;
 

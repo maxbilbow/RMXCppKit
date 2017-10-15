@@ -32,7 +32,7 @@ set(RMX_KIT )
 ## Kit tests
 add_executable(ObjectTest tests/RMXKit/ObjectTest.cpp ${KIT_DIR}/Object.h ${KIT_DIR}/Object.cpp)
 add_executable(EventListenerTest tests/RMXKit/EventListenerTest.cpp
-        ${KIT_DIR}/EventListener.h ${KIT_DIR}/EventListener.cpp
+        ${KIT_DIR}/SimpleEventListener.h ${KIT_DIR}/SimpleEventListener.cpp
         ${KIT_DIR}/NotificationCenter.h ${KIT_DIR}/NotificationCenter.cpp
         ${KIT_DIR}/Object.h ${KIT_DIR}/Object.cpp)
 

@@ -9,8 +9,7 @@
 
 
 #include "NotificationCenter.h"
-#include <typeinfo>
-
+#include <iostream>
 #ifdef DEBUG_RMX_NOTIFICATION_CENTER
 #define DEBUG_THIS true
 #endif
@@ -27,6 +26,9 @@ NotificationCenter* NotificationCenter::getInstance() {
 }
 
 bool NotificationCenter::hasListener(EventListener * listener) {
+    if (this->listeners.empty())
+        return false;
+
     auto it = listeners.begin();
 
     do {
@@ -50,6 +52,9 @@ void NotificationCenter::addListener(EventListener * listener) {
 }
 
 EventListener * NotificationCenter::removeListener(EventListener * listener) {
+    if (this->listeners.empty())
+        return nullptr;
+
     this->listeners.remove(listener);
     return listener;
 }
@@ -58,7 +63,7 @@ EventStatus NotificationCenter::statusOf(EventType theEvent) {
     try {
         return this->events[theEvent];
     } catch (exception& e) {
-        cout << typeid(this).name() << ": " << e.what() << ": setting new event as Idle" << endl;
+        cout << "NotificationCenter: " << e.what() << ": setting new event as Idle" << endl;
         this->events[theEvent] = EVENT_STATUS_IDLE;
         return EVENT_STATUS_IDLE;
     }
@@ -89,24 +94,33 @@ bool NotificationCenter::didFail(EventType theEvent) {
 
 
 void NotificationCenter::eventWillStart(EventType theEvent, EventArgs o) {
+    if (this->listeners.empty())
+        return;
+
     auto it = this->listeners.begin();
     do {
-        (*it)->OnEventDidStart(theEvent, o);
-    } while (it++ != this->listeners.end());
+        (*it)->onEventDidStart(theEvent, o);
+    } while (++it != this->listeners.end());
 }
 
 void NotificationCenter::eventDidEnd(EventType theEvent, EventArgs o) {
+    if (this->listeners.empty())
+        return;
+
     auto it = this->listeners.begin();
     do {
-        (*it)->OnEventDidEnd(theEvent, o);
-    } while (it++ != this->listeners.end());
+        (*it)->onEventDidEnd(theEvent, o);
+    } while (++it != this->listeners.end());
 }
 
  void NotificationCenter::notifyListeners(string message, EventArgs args) {
+     if (this->listeners.empty())
+         return;
+
      auto it = this->listeners.begin();
      do {
-         (*it)->SendMessage(message, args);
-     } while (it++ != this->listeners.end());
+         (*it)->sendMessage(message, args);
+     } while (++it != this->listeners.end());
 }
 
 #ifdef DEBUG_THIS

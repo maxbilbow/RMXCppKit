@@ -12,24 +12,25 @@
 
 
 #include <iostream>
+#include "NotificationCenter.h"
 
 namespace rmx {
     /*!
-     * 
+     *
      *   @author Max Bilbow, 15-08-04 16:08:32
      *
      *   @brief  abstract class for EventListeners
      *   @see NotificationCenter
      *   @since 0.1
      */
-    class EventListener {
-        ///Private initilization adds this object to NotificationCenter::listeners iff add == true;
-        ///@see NotificationCenter::listeners
-        void init(bool add = true);
+    class SimpleEventListener  : public EventListener{
+
+        NotificationCenter * notificationCenter;
+
     public:
-        typedef const std::string& AnEvent;
-        typedef void * EventArgs;
-        
+
+
+
         /*!
          *  @author Max Bilbow, 15-08-04 16:08:01
          *
@@ -39,12 +40,10 @@ namespace rmx {
          *  @see Object
          *  @since <#0.1#>
          */
-        explicit EventListener(const std::string &name = "", bool add = true) {
-            this->init(add);
-        }
+        explicit SimpleEventListener(NotificationCenter * notificationCenter = NotificationCenter::getInstance());
 
-        ~EventListener();
-        
+        ~SimpleEventListener();
+
         /*!
          *  @author Max Bilbow, 15-08-04 16:08:30
          *
@@ -53,8 +52,8 @@ namespace rmx {
          *  @param args     anything
          *  @since 0.1
          */
-        virtual void OnEventDidStart(AnEvent theEvent, EventArgs args);
-        
+        virtual void onEventDidStart(AnEvent theEvent, EventArgs args) override;
+
         /*!
          *  @author Max Bilbow, 15-08-04 16:08:53
          *
@@ -63,9 +62,9 @@ namespace rmx {
          *  @param args     anything
          *  @since 0.1
          */
-        virtual void OnEventDidEnd(AnEvent theEvent, EventArgs args);
+        virtual void onEventDidEnd(AnEvent theEvent, EventArgs args) override;
 
-        
+
         /*!
          *   @author Max Bilbow, 15-08-04 16:08:55
          *
@@ -76,7 +75,7 @@ namespace rmx {
          *   @param args    any object.
          *   @since 0.1
          */
-        virtual void SendMessage(AnEvent message, EventArgs args);
+        virtual void sendMessage(AnEvent message, EventArgs args) override;
 
         /*!
          *   @author Max Bilbow, 15-08-04 16:08:22
@@ -86,8 +85,8 @@ namespace rmx {
          *   @see NotificationCenter::addListener(listener)
          *   @since 0.1
          */
-        void StartListening();
-        
+        SimpleEventListener * startListening();
+
         /*!
          *   @author Max Bilbow, 15-08-04 16:08:22
          *
@@ -95,14 +94,14 @@ namespace rmx {
          *   @see NotificationCenter::removeListener(listener)
          *   @since <#0.1#>
          */
-        void StopListening();
+        SimpleEventListener * stopListening();
 
     };
 
 }
 
 
-#endif /* EventListener */
+#endif /* SimpleEventListener */
 
 
 
