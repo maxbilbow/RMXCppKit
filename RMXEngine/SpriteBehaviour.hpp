@@ -9,9 +9,8 @@
 #ifndef SpriteBehaviour_hpp
 #define SpriteBehaviour_hpp
 
-#include <stdio.h>
-
-#endif /* SpriteBehaviour_hpp */
+#include <cstdio>
+#include "Behaviour.hpp"
 
 
 namespace rmx {
@@ -24,3 +23,5 @@ namespace rmx {
         void SendMessage(std::string message, void * args = nullptr, SendMessageOptions options = DoesNotRequireReceiver) override;
     };
 }
+
+#endif /* SpriteBehaviour_hpp */

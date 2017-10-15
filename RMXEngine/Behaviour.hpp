@@ -9,21 +9,17 @@
 #ifndef Behaviour_hpp
 #define Behaviour_hpp
 
-#include <stdio.h>
-
-#endif /* Behaviour_hpp */
-
-
+#include <cstdio>
+#include "NotificationCenter.h"
 
 namespace rmx {
-    class Behaviour : public NodeComponent {
+    class Behaviour : public EventListener {
     protected:
         bool enabled;
     public:
        
-        Behaviour():NodeComponent() {
+        Behaviour() {
             this->enabled = true;
-            this->setName("Behaviour");
         }
         
         bool isEnabled(){
@@ -36,12 +32,13 @@ namespace rmx {
         virtual void update(){}
         virtual void lateUpdate(){}
         
-        virtual void SendMessage(std::string,void*,SendMessageOptions) override {
-            Object::SendMessage("Message Received via Behaviour");
-            }
+        virtual void sendMessage(AnEvent,EventArgs/*,SendMessageOptions*/) = 0;
         
         
     };
     
     
 }
+
+
+#endif /* Behaviour_hpp */

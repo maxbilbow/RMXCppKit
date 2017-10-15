@@ -25,7 +25,7 @@ include_directories("${KIT_DIR}" "${ENGINE_DIR}" "${MATH_DIR}")
 
 #add_definitions(-DDEBUG_RMX_OBJECT -DDEBUG_MALLOC)
 ## Engine Tests
-#add_executable(CameraTest tests/RMXEngine/CameraTest.cpp ${SOURCE_FILES})
+add_executable(CameraTest tests/RMXEngine/CameraTest.cpp ${SOURCE_FILES})
 
 
 set(RMX_KIT )

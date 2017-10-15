@@ -19,7 +19,7 @@ using namespace rmx;
 using namespace std;
 
 void SpriteBehaviour::jump(float force){
-   this->getNode()->physicsBody()->applyForce(force, GLKVector3Make(0,1,0));
+   this->getNode()->physicsBody()->applyForce(force, Vector3Make(0,1,0));
 }
 
 void SpriteBehaviour::SendMessage(string message, void * args, SendMessageOptions options) {
